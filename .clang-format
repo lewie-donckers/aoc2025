@@ -1,0 +1,18 @@
+﻿---
+BasedOnStyle: Google
+
+ColumnLimit: 120
+IndentWidth: 4
+AccessModifierOffset: -4
+DerivePointerAlignment: false
+
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^"'
+    Priority: 1
+  - Regex: "^<nobleo/"
+    Priority: 2
+  - Regex: "^<.*/"
+    Priority: 3
+  - Regex: '^<[^/\.]*$'
+    Priority: 4
