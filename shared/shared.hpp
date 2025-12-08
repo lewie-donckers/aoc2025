@@ -30,3 +30,12 @@ template <typename T, typename R>
 auto operator|(R&& range, as_t<T>) {
     return std::forward<R>(range) | std::views::transform([](const auto& e) { return T{e}; });
 }
+
+template <typename T>
+T parseInt(std::string_view sv) {
+    assert(sv.find_first_not_of("0123456789") == std::string_view::npos);
+
+    auto result = T{};
+    std::from_chars(sv.begin(), sv.end(), result);
+    return result;
+}
