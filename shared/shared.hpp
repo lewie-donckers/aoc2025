@@ -39,3 +39,19 @@ T parseInt(std::string_view sv) {
     std::from_chars(sv.begin(), sv.end(), result);
     return result;
 }
+
+template <typename T, std::size_t N, typename R>
+T makeFromRange(R&& range) {
+    static constexpr auto element = [](R& range, auto& it, std::size_t) {
+        assert(it != range.end());
+        return *(it++);
+    };
+    static constexpr auto impl = []<std::size_t... Indices>(R& range, std::index_sequence<Indices...>) {
+        auto it = range.begin();
+        auto result = T{element(range, it, Indices)...};
+        assert(it == range.end());
+        return result;
+    };
+
+    return impl(range, std::make_index_sequence<N>());
+}
